@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@color/colorPrimary_100"
+        >
+
+    <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:background="@drawable/style_round_cardview"
+            android:backgroundTint="@color/colorPrimary_100"
+            android:elevation="6dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.9">
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="296dp"
+            android:layout_height="80dp"
+            android:background="@drawable/style_round_cardview"
+            android:backgroundTint="@color/colorPrimary_100"
+            android:elevation="6dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.73">
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="312dp"
+            android:layout_height="81dp"
+            android:background="@drawable/style_round_cardview"
+            android:backgroundTint="#ffffff"
+            android:elevation="6dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="공지사항"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="9dp"
+                android:text="사감부에서 게시한 공지사항을 열람합니다."
+                android:textSize="12sp"
+        />
+    </LinearLayout>
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_round_keyboard_arrow_down_24px"
+            android:elevation="6dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout" app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintVertical_bias="0.0"
+        />
+</android.support.constraint.ConstraintLayout>

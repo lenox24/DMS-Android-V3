@@ -3,4 +3,24 @@
     <color name="colorPrimary">#19b6b6</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#DFFF</color>
+
+    <color name="colorSaturation_100">#FFFFFF</color>
+    <color name="colorSaturation_200">#DFDFDF</color>
+    <color name="colorSaturation_300">#BFBFBF</color>
+    <color name="colorSaturation_400">#9F9F9F</color>
+    <color name="colorSaturation_500">#808080</color>
+    <color name="colorSaturation_600">#606060</color>
+    <color name="colorSaturation_700">#404040</color>
+    <color name="colorSaturation_800">#202020</color>
+    <color name="colorSaturation_900">#000000</color>
+
+    <color name="colorPrimary_100">#FFFFFF</color>
+    <color name="colorPrimary_200">#E2F6F6</color>
+    <color name="colorPrimary_300">#C6EDED</color>
+    <color name="colorPrimary_400">#A9E4E4</color>
+    <color name="colorPrimary_500">#8CDBDB</color>
+    <color name="colorPrimary_600">#6FD1d1</color>
+    <color name="colorPrimary_700">#53C8C8</color>
+    <color name="colorPrimary_800">#36BFBF</color>
+    <color name="colorPrimary_900">#19B6B6</color>
 </resources>
