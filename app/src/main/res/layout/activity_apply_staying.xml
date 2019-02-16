@@ -14,7 +14,8 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:theme="@style/AppTheme.AppBarOverlay"
-                android:id="@+id/appBarLayout">
+                android:id="@+id/appBarLayout"
+                app:layout_constraintTop_toTopOf="parent">
 
             <android.support.v7.widget.Toolbar
                     android:id="@+id/applyStaying_toolbar"
@@ -106,6 +107,8 @@
                 android:id="@+id/applyStaying_apply_list_pager"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:pageChange="@={applyStayingViewModel.pageStatusLiveData}"
+                app:selectedStatus="@{applyStayingViewModel.selectedStatusLiveData}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/applyStaying_explanation_lay"

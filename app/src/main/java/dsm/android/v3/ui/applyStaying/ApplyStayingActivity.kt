@@ -13,6 +13,7 @@ import dsm.android.v3.R
 import dsm.android.v3.databinding.ActivityApplyStayingBinding
 import dsm.android.v3.model.ApplyStayingModel
 import dsm.android.v3.util.DataBindingActivity
+import kotlinx.android.synthetic.main.activity_apply_staying.*
 import kotlinx.android.synthetic.main.item_apply_staying.view.*
 import org.jetbrains.anko.find
 
@@ -46,13 +47,15 @@ class ApplyStayingActivity: DataBindingActivity<ActivityApplyStayingBinding>(), 
     }
 
     fun setPager(){
-        binding.applyStayingApplyListPager.adapter = ApplyPageAdapter(
+        applyStaying_apply_list_pager.adapter = ApplyPageAdapter(
             arrayListOf(
             ApplyStayingModel(getString(R.string.apply_staying_staying_title), getString(R.string.apply_staying_staying_explanation))
             , ApplyStayingModel(getString(R.string.apply_staying_friday_title), getString(R.string.apply_staying_friday_explanation))
             , ApplyStayingModel(getString(R.string.apply_staying_saturday_go_title), getString(R.string.apply_staying_saturday_go_explanation))
             , ApplyStayingModel(getString(R.string.apply_staying_saturday_back_title), getString(R.string.apply_staying_saturday_back_explanation))
             ))
+        applyStaying_apply_list_pager.offscreenPageLimit = 3
+
     }
 
     inner class ApplyPageAdapter(val models: ArrayList<ApplyStayingModel>): PagerAdapter(){
@@ -72,10 +75,10 @@ class ApplyStayingActivity: DataBindingActivity<ActivityApplyStayingBinding>(), 
             return view
         }
 
-        override fun startUpdate(container: ViewGroup) {
-            super.startUpdate(container)
-            viewGroup = container
-        }
+//        override fun startUpdate(container: ViewGroup) {
+//            super.startUpdate(container)
+//            viewGroup = container
+//        }
 
     }
 }
