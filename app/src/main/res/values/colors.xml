@@ -5,7 +5,7 @@
     <color name="colorAccent">#DFFF</color>
     <color name="colorWhite">#FFFFFF</color>
 
-    <color name="colorRed">#ff5454</color>
+    <color name="colorRed">#ff6a6a</color>
 
     <!-- color for Grayscale-->
     <color name="colorGray100">#FFF</color>
@@ -30,4 +30,5 @@
 
     <color name="cardview_shadow_start_color">#1419b6b6</color>
     <color name="cardview_shadow_end_color">#03ffffff</color>
+    <color name="layout_back_color">#f3f3f3</color>
 </resources>
