@@ -41,6 +41,6 @@ class MusicApplyDocActivity: DataBindingActivity<dsm.android.v3.databinding.Acti
     }
 
     override fun createListFullWarningToast() {
-        toast("자신이 신청한 곡만 취소할 수 있습니다")
+        toast("노래 신청이 마감되었습니다.")
     }
 }

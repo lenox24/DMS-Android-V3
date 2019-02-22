@@ -1,6 +1,7 @@
 package dsm.android.v3.adapter
 
 import android.graphics.Color
+import android.support.v7.widget.Api17CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +28,7 @@ class MusicApplyLogAdapter(val models: ArrayList<MusicApplyLogItemModel>, val ap
         val music = itemView.find<TextView>(R.id.musicApply_log_card_music_tv)
         val artist = itemView.find<TextView>(R.id.musicApply_log_card_artist_tv)
         val student = itemView.find<TextView>(R.id.musicApply_log_card_student_tv)
-        val cardLayout = itemView.find<LinearLayout>(R.id.musicApply_log_card_lay)
+        val cardLayout = itemView.find<Api17CardView>(R.id.musicApply_log_card)
         var clicked: Boolean = false
 
         fun bind(model: MusicApplyLogItemModel){
