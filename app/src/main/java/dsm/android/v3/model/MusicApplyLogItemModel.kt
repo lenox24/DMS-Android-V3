@@ -1,3 +1,3 @@
 package dsm.android.v3.model
 
-data class MusicApplyLogItemModel(val music: String, val artist: String, val student: String)
+data class MusicApplyLogItemModel(var music: String, var artist: String, var student: String)

@@ -12,7 +12,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".ui.main.MainActivity"
+                android:name=".ui.musicApply.MusicApplyActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,7 +28,7 @@
 
         <activity android:name=".ui.changePassword.ChangePasswordActivity">
         </activity>
-        <activity android:name=".ui.musicApply.MusicApplyActivity"/>
+        <activity android:name=".ui.main.MainActivity"/>
         <activity android:name=".ui.musicApplyLog.MusicApplyLogActivity"/>
         <activity android:name=".ui.musicApplyDoc.MusicApplyDocActivity"/>
     </application>
