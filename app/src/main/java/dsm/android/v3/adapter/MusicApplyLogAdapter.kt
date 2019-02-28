@@ -39,9 +39,9 @@ class MusicApplyLogAdapter(val models: ArrayList<MusicApplyLogItemModel>, val ap
         val music = itemView.find<TextView>(R.id.musicApply_log_card_music_tv)
         val artist = itemView.find<TextView>(R.id.musicApply_log_card_artist_tv)
         val student = itemView.find<TextView>(R.id.musicApply_log_card_student_tv)
-        val cardLayout = itemView.find<Api17CardView>(R.id.musicApply_log_card)
+        val cardLayout = itemView.find<LinearLayout>(R.id.musicApply_log_card_lay)
         var clicked: Boolean = false
-        val week = {
+        val week: String by lazy {
             when (this.musicApplyLogActivity.title){
                 "월요일 기상음악"-> "mon"
                 "화요일 기상음악"->  "tue"
@@ -57,17 +57,19 @@ class MusicApplyLogAdapter(val models: ArrayList<MusicApplyLogItemModel>, val ap
                 if (clicked) {
                     itemClickedTrue()
                     applyGoingLogRv.logItemClickTrue(model)
+                    Log.e("Asdf", week)
                 }
                 else {
                     itemClickedFalse()
                     applyGoingLogRv.logItemClickFalse(model)
                 }
             }
-            Connecter.api.getMusic(getToken(itemView.context)).enqueue(object : Callback<JsonObject> {
+            val token = "Bearer " + getToken(itemView.context)
+            Connecter.api.getMusic(token).enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) =
                     when (response.code()) {
                         200 -> {
-                            val body = response.body()!![week.toString()].asJsonObject
+                            val body = response.body()!![week].asJsonObject
                             when(musicApplyLogActivity.title){
                                 "월요일 기상음악"-> {
                                     musicApplyLogData.mondayItemList.add(MusicApplyLogItemModel(
@@ -104,17 +106,16 @@ class MusicApplyLogAdapter(val models: ArrayList<MusicApplyLogItemModel>, val ap
                                         body.getAsJsonArray("신청곡이 없습니다.").flatten(),
                                         body.getAsJsonArray("눌러서 노래를 신청해주세요.").flatten(),
                                         body.getAsJsonArray("신청없음").flatten()))
+                                    Log.e("Asdf", week)
                                 }
                             }
                             notifyDataSetChanged()
                         }
                         else -> {
-                            Log.e("아니",response.code().toString())
-                            Log.e("아니",response.body().toString())
-                            Log.e("아니",getToken(itemView.context))
                             music.text = "네트워크"
                             artist.text = "상태를"
                             student.text = "확인해주세요"
+                            Log.e("Asdf", week)
                             notifyDataSetChanged()
                         }
                     }
@@ -122,7 +123,7 @@ class MusicApplyLogAdapter(val models: ArrayList<MusicApplyLogItemModel>, val ap
                     music.text = "네트워크"
                     artist.text = "상태를"
                     student.text = "확인해주세요"
-                    Log.e("아니","왜안돼냐고 진짜")
+                    Log.e("Asdf", week)
                     notifyDataSetChanged()
                 }
             })

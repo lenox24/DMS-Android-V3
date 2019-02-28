@@ -2,7 +2,6 @@ package dsm.android.v3.connecter
 
 import com.google.gson.JsonObject
 import dsm.android.v3.model.MealModel
-import dsm.android.v3.model.MusicModel
 import retrofit2.Call
 import retrofit2.http.*
 
