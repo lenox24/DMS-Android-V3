@@ -1,19 +1,17 @@
 package dsm.android.v3.ui.musicApplyLog
 
-import android.annotation.SuppressLint
 import dsm.android.v3.util.DataBindingActivity
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import  java.util.ArrayList
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import dsm.android.v3.R
 import dsm.android.v3.databinding.ActivityMusicApplyLogBinding
-import dsm.android.v3.model.MusicApplyLogItemModel
-import dsm.android.v3.ui.musicApplyLog.MusicApplyLogData.deleteData
+import dsm.android.v3.ui.musicApplyLog.MusicApplyLogData.deleteDataList
 import dsm.android.v3.adapter.MusicApplyLogAdapter
-import dsm.android.v3.ui.musicApply.MusicApplyActivity
+import dsm.android.v3.ui.musicApply.MusicApplyDataModel
 import kotlinx.android.synthetic.main.activity_music_apply_log.*
 
 class MusicApplyLogActivity : DataBindingActivity<ActivityMusicApplyLogBinding>(), MusicApplyLogNavigator,
@@ -26,31 +24,34 @@ class MusicApplyLogActivity : DataBindingActivity<ActivityMusicApplyLogBinding>(
         val title = intent.getStringExtra("title")
         super.onCreate(savedInstanceState)
         val factory =
-            MusicApplyLogViewModelFactory(this, intent.getStringExtra("title"))
+            MusicApplyLogViewModelFactory(this, intent.getStringExtr햣a("title"))
         binding.vm = ViewModelProviders.of(this, factory).get(MusicApplyLogViewModel::class.java)
         binding.musicApplyApplyRecordRv.layoutManager = LinearLayoutManager(this)
         invisibleDeleteBtn()
         explainText(this, title)
     }
 
-    override fun logItemClickTrue(model: MusicApplyLogItemModel) {
-        deleteData.remove(model)
-        if (deleteData.isEmpty()) {
+    override fun logItemClickTrue(model: MusicApplyDataModel.MusicApplyDataModel) {
+        deleteDataList.remove(model)
+        if (deleteDataList.isEmpty()) {
             invisibleDeleteBtn()
         }
     }
 
-    override fun logItemClickFalse(model: MusicApplyLogItemModel) {
-        deleteData.add(model)
+    override fun logItemClickFalse(model: MusicApplyDataModel.MusicApplyDataModel) {
+        deleteDataList.add(model)
         visibleDeleteBtn()
     }
 
-
-    override fun setApplyList(models: ArrayList<MusicApplyLogItemModel>) {
+    override fun setApplyList(models: ArrayList<MusicApplyDataModel.MusicApplyDataModel>) {
         binding.musicApplyApplyRecordRv.adapter = MusicApplyLogAdapter(models, this)
     }
 
     override fun backApplyGoing() = finish()
+
+    override fun toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 
     fun visibleDeleteBtn() {
         binding.applyGoingApplyDeleteBtn.visibility = View.VISIBLE

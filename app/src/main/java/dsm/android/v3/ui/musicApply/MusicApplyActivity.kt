@@ -23,20 +23,16 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import android.util.TypedValue
 
-
-
 @Suppress("DEPRECATION")
 class MusicApplyActivity : DataBindingActivity<dsm.android.v3.databinding.ActivityMusicApplyBinding>(), MusicApplyNavigator {
 
     override val layoutId: Int
     get() = R.layout.activity_music_apply
 
-    private val factory = MusicApplyViewModelFactory(this, Lifecycle.Event.ON_START)
-    private val viewModel: MusicApplyViewModel by lazy { ViewModelProviders.of(this, factory).get(MusicApplyViewModel::class.java) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = viewModel
+        val factory = MusicApplyViewModelFactory(this)
+        binding.vm =  ViewModelProviders.of(this, factory).get(MusicApplyViewModel::class.java)
     }
 
     override fun setViewPager(mondayCount: Int, tuesdayCount: Int, wednesdayCount: Int, thursdayCount: Int, fridayCount: Int){

@@ -8,23 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import  java.util.ArrayList
 import android.widget.TextView
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import dsm.android.v3.R
-import dsm.android.v3.connecter.Connecter
-import dsm.android.v3.model.MusicApplyLogItemModel
-import dsm.android.v3.model.MusicModel
+import dsm.android.v3.ui.musicApply.MusicApplyDataModel
 import dsm.android.v3.ui.musicApplyLog.MusicApplyLogActivity
 import dsm.android.v3.ui.musicApplyLog.MusicApplyLogData
 import dsm.android.v3.ui.musicApplyLog.MusicApplyLogNavigator
-import dsm.android.v3.util.getToken
 import org.jetbrains.anko.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class MusicApplyLogAdapter(val models: ArrayList<MusicApplyLogItemModel>, val applyGoingLogRv: MusicApplyLogNavigator.MusicApplyLogRv): RecyclerView.Adapter<MusicApplyLogAdapter.ApplyGoingLogViewHolder>(){
+class MusicApplyLogAdapter(val models: ArrayList<MusicApplyDataModel.MusicApplyDataModel>, val applyGoingLogRv: MusicApplyLogNavigator.MusicApplyLogRv): RecyclerView.Adapter<MusicApplyLogAdapter.ApplyGoingLogViewHolder>(){
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ApplyGoingLogViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.item_music_apply_log, p0, false)
@@ -52,7 +45,7 @@ class MusicApplyLogAdapter(val models: ArrayList<MusicApplyLogItemModel>, val ap
             }
         }
 
-        fun bind(model: MusicApplyLogItemModel){
+        fun bind(model:  MusicApplyDataModel.MusicApplyDataModel){
             itemView.setOnClickListener {
                 if (clicked) {
                     itemClickedTrue()
@@ -64,82 +57,82 @@ class MusicApplyLogAdapter(val models: ArrayList<MusicApplyLogItemModel>, val ap
                     applyGoingLogRv.logItemClickFalse(model)
                 }
             }
-            val token = "Bearer " + getToken(itemView.context)
-            Connecter.api.getMusic(token).enqueue(object : Callback<JsonObject> {
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) =
-                    when (response.code()) {
-                        200 -> {
-                            val body = response.body()!![week].asJsonObject
-                            when(musicApplyLogActivity.title){
-                                "월요일 기상음악"-> {
-                                    musicApplyLogData.mondayItemList.add(MusicApplyLogItemModel(
-                                        body.getAsJsonArray("musicName").flatten(),
-                                        body.getAsJsonArray("singer").flatten(),
-                                        body.getAsJsonArray("studentId").flatten()))
-                                }
-                                "화요일 기상음악"->  {
-                                    musicApplyLogData.tuesdayItemList.add(MusicApplyLogItemModel(
-                                        body.getAsJsonArray("musicName").flatten(),
-                                        body.getAsJsonArray("singer").flatten(),
-                                        body.getAsJsonArray("studentId").flatten()))
-                                }
-                                "수요일 기상음악"->  {
-                                    musicApplyLogData.wednesdayItemList.add(MusicApplyLogItemModel(
-                                        body.getAsJsonArray("musicName").flatten(),
-                                        body.getAsJsonArray("singer").flatten(),
-                                        body.getAsJsonArray("studentId").flatten()))
-                                }
-                                "목요일 기상음악"->  {
-                                    musicApplyLogData.thursdayItemList.add(MusicApplyLogItemModel(
-                                        body.getAsJsonArray("musicName").flatten(),
-                                        body.getAsJsonArray("singer").flatten(),
-                                        body.getAsJsonArray("studentId").flatten()))
-                                }
-                                "금요일 기상음악"->  {
-                                    musicApplyLogData.fridayItemList.add(MusicApplyLogItemModel(
-                                        body.getAsJsonArray("musicName").flatten(),
-                                        body.getAsJsonArray("singer").flatten(),
-                                        body.getAsJsonArray("studentId").flatten()))
-                                }
-                                else -> {
-                                    musicApplyLogData.fridayItemList.add(MusicApplyLogItemModel(
-                                        body.getAsJsonArray("신청곡이 없습니다.").flatten(),
-                                        body.getAsJsonArray("눌러서 노래를 신청해주세요.").flatten(),
-                                        body.getAsJsonArray("신청없음").flatten()))
-                                    Log.e("Asdf", week)
-                                }
-                            }
-                            notifyDataSetChanged()
-                        }
-                        else -> {
-                            music.text = "네트워크"
-                            artist.text = "상태를"
-                            student.text = "확인해주세요"
-                            Log.e("Asdf", week)
-                            notifyDataSetChanged()
-                        }
-                    }
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    music.text = "네트워크"
-                    artist.text = "상태를"
-                    student.text = "확인해주세요"
-                    Log.e("Asdf", week)
-                    notifyDataSetChanged()
-                }
-            })
-        }
-        fun JsonArray.flatten(): String {
-            val builder = StringBuilder()
-            forEach {
-                builder.append(it)
-            }
-            return if (size() != 0) {
-                forEach {
-                    builder.append("${it.asString}, ")
-                }
-                builder.delete(builder.lastIndex - 1, builder.lastIndex).toString()
-            } else
-                "노래가 없습니다."
+//            saveToken(itemView.context, "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTE0NTMwMDksIm5iZiI6MTU1MTQ1MzAwOSwianRpIjoiNGE3ODQ1YTAtZDFmNy00ODI2LTk4YTktNmFjY2RjM2JmY2E4IiwiZXhwIjoxNTUxNDU2NjA5LCJpZGVudGl0eSI6ImhlbGxvIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.wIIbZBu36a-dqOQA4j60AtnPlu8okkHMqCmoC2hW_Fg")
+//            val token = "Bearer " + getToken(itemView.context)
+//            Connecter.api.getMusic(token).enqueue(object : Callback<JsonObject> {
+//                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) =
+//                    when (response.code()) {
+//                        200 -> {
+//                            val body = response.body()!!.asJsonObject
+//                            when(musicApplyLogActivity.title){
+//                                "월요일 기상음악"-> {
+//                                    musicApplyLogData.mondayItemList.add(MusicApplyLogItemModel(
+//                                        body.getAsJsonArray("musicName").flatten(),
+//                                        body.getAsJsonArray("singer").flatten(),
+//                                        body.getAsJsonArray("studentId").flatten()))
+//                                }
+//                                "화요일 기상음악"->  {
+//                                    musicApplyLogData.tuesdayItemList.add(MusicApplyLogItemModel(
+//                                        body.getAsJsonArray("musicName").flatten(),
+//                                        body.getAsJsonArray("singer").flatten(),
+//                                        body.getAsJsonArray("studentId").flatten()))
+//                                }
+//                                "수요일 기상음악"->  {
+//                                    musicApplyLogData.wednesdayItemList.add(MusicApplyLogItemModel(
+//                                        body.getAsJsonArray("musicName").flatten(),
+//                                        body.getAsJsonArray("singer").flatten(),
+//                                        body.getAsJsonArray("studentId").flatten()))
+//                                }
+//                                "목요일 기상음악"->  {
+//                                    musicApplyLogData.thursdayItemList.add(MusicApplyLogItemModel(
+//                                        body.getAsJsonArray("musicName").flatten(),
+//                                        body.getAsJsonArray("singer").flatten(),
+//                                        body.getAsJsonArray("studentId").flatten()))
+//                                }
+//                                "금요일 기상음악"->  {
+//                                    musicApplyLogData.fridayItemList.add(MusicApplyLogItemModel(
+//                                        body.getAsJsonArray("musicName").flatten(),
+//                                        body.getAsJsonArray("singer").flatten(),
+//                                        body.getAsJsonArray("studentId").flatten()))
+//                                }
+//                                else -> {
+//                                    musicApplyLogData.fridayItemList.add(MusicApplyLogItemModel(
+//                                        body.getAsJsonArray("신청곡이 없습니다.").flatten(),
+//                                        body.getAsJsonArray("눌러서 노래를 신청해주세요.").flatten(),
+//                                        body.getAsJsonArray("신청없음").flatten()))
+//                                    Log.e("Asdfdddd", week)
+//                                    Log.e("Asdfdddd", response.body().toString())
+//                                }
+//                            }
+//                            notifyDataSetChanged()
+//                        }
+//                        else -> {
+//                            music.text = "네트워크"
+//                            artist.text = "상태를"
+//                            student.text = "확인해주세요"
+//                            notifyDataSetChanged()
+//                        }
+//                    }
+//                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+//                    music.text = "네트워크"
+//                    artist.text = "상태를"
+//                    student.text = "확인해주세요"
+//                    notifyDataSetChanged()
+//                }
+//            })
+//        }
+//        fun JsonArray.flatten(): String {
+//            val builder = StringBuilder()
+//            forEach {
+//                builder.append(it)
+//            }
+//            return if (size() != 0) {
+//                forEach {
+//                    builder.append("${it.asString}, ")
+//                }
+//                builder.delete(builder.lastIndex - 1, builder.lastIndex).toString()
+//            } else
+//                "노래가 없습니다."
         }
 
         fun itemClickedTrue(){

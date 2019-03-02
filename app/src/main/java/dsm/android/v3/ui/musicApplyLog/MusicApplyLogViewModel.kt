@@ -2,6 +2,14 @@ package dsm.android.v3.ui.musicApplyLog
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
+import android.view.View
+import dsm.android.v3.connecter.Connecter.api
+import dsm.android.v3.ui.musicApplyLog.MusicApplyLogData.deleteDataList
+import dsm.android.v3.util.getToken
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MusicApplyLogViewModel(val contract: MusicApplyLogNavigator, val title: String) : ViewModel() {
 
@@ -19,43 +27,34 @@ class MusicApplyLogViewModel(val contract: MusicApplyLogNavigator, val title: St
         }
     }
 
-    fun musicApply() {
-        //서버에서 받아온게 비어있을 때 눌렀을때 신청이미지로 intent
-    }
 
-    fun musicApplyStatus() {
+    fun musicApplyClickDelete(view: View) {
+        // 서버 통신 필요
+        //아예 삭제해버리면 안돼고 아이템은 2개로 유지
+        for (deleteData in deleteDataList) {
+            Log.e("dsgsdgdsg", "${deleteData.id}")
+            api.deleteMusic(getToken(view.context), hashMapOf("applyId" to deleteData.id))
+                .enqueue(object : Callback<Unit> {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                        contract.toast(
+                            when (response.code()) {
+                                200 -> "기상음악 취소 성공"
+                                204 -> "존재하지 않는 applyId"
+                                403 -> "권한이 없습니다."
+                                else -> "오류코드: ${response.code()}"
+                            }
+                        )
+                        contract.backApplyGoing()
+                    }
 
-    }
-
-
-fun musicApplyClickDelete() {
-    // 서버 통신 필요
-    //아예 삭제해버리면 안돼고 아이템은 2개로 유지
-    when (logTitle.value) {
-        "월요일 기상음악" -> {
-            MusicApplyLogData.mondayItemList.removeAll(MusicApplyLogData.deleteData)
-            contract.setApplyList(MusicApplyLogData.nothingData)
-        }
-        "화요일 기상음악" -> {
-            MusicApplyLogData.tuesdayItemList.removeAll(MusicApplyLogData.deleteData)
-            contract.setApplyList(MusicApplyLogData.nothingData)
-        }
-        "수요일 기상음악" -> {
-            MusicApplyLogData.wednesdayItemList.removeAll(MusicApplyLogData.deleteData)
-            contract.setApplyList(MusicApplyLogData.nothingData)
-        }
-        "목요일 기상음악" -> {
-            contract.setApplyList(MusicApplyLogData.nothingData)
-        }
-        "금요일 기상음악" -> {
-            MusicApplyLogData.fridayItemList.removeAll(MusicApplyLogData.deleteData)
-            contract.setApplyList(MusicApplyLogData.nothingData)
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        contract.toast("오류가 발생했습니다.")
+                    }
+                })
         }
     }
-    contract.backApplyGoing()
-}
 
-fun musicApplyLogClickBack() {
-    contract.backApplyGoing()
-}
+    fun musicApplyLogClickBack() {
+        contract.backApplyGoing()
+    }
 }

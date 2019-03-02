@@ -4,7 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 
-class MusicApplyViewModelFactory(val contract: MusicApplyNavigator, val event: Lifecycle.Event): ViewModelProvider.Factory{
+class MusicApplyViewModelFactory(val contract: MusicApplyNavigator): ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T
-            = modelClass.getConstructor(MusicApplyNavigator::class.java, Lifecycle.Event::class.java).newInstance(contract, event)
+            = modelClass.getConstructor(MusicApplyNavigator::class.java).newInstance(contract)
 }
