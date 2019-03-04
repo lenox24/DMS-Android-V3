@@ -4,12 +4,12 @@ import dsm.android.v3.ui.musicApply.MusicApplyDataModel
 import  java.util.ArrayList
 
 interface MusicApplyLogNavigator {
-    fun setApplyList(models: ArrayList<MusicApplyDataModel.MusicApplyDataModel>)
+    fun setApplyList(models: ArrayList<MusicApplyDataModel.MusicApplyDataModelSub>)
     fun backApplyGoing()
     fun toast(message : String)
 
     interface MusicApplyLogRv{
-        fun logItemClickTrue(model:  MusicApplyDataModel.MusicApplyDataModel)
-        fun logItemClickFalse(model:  MusicApplyDataModel.MusicApplyDataModel)
+        fun logItemClickTrue(model:  MusicApplyDataModel.MusicApplyDataModelSub)
+        fun logItemClickFalse(model:  MusicApplyDataModel.MusicApplyDataModelSub)
     }
 }

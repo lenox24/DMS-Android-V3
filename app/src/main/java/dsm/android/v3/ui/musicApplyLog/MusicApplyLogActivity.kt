@@ -24,26 +24,26 @@ class MusicApplyLogActivity : DataBindingActivity<ActivityMusicApplyLogBinding>(
         val title = intent.getStringExtra("title")
         super.onCreate(savedInstanceState)
         val factory =
-            MusicApplyLogViewModelFactory(this, intent.getStringExtr햣a("title"))
+            MusicApplyLogViewModelFactory(this, intent.getStringExtra("title"))
         binding.vm = ViewModelProviders.of(this, factory).get(MusicApplyLogViewModel::class.java)
         binding.musicApplyApplyRecordRv.layoutManager = LinearLayoutManager(this)
         invisibleDeleteBtn()
         explainText(this, title)
     }
 
-    override fun logItemClickTrue(model: MusicApplyDataModel.MusicApplyDataModel) {
+    override fun logItemClickTrue(model: MusicApplyDataModel.MusicApplyDataModelSub) {
         deleteDataList.remove(model)
         if (deleteDataList.isEmpty()) {
             invisibleDeleteBtn()
         }
     }
 
-    override fun logItemClickFalse(model: MusicApplyDataModel.MusicApplyDataModel) {
+    override fun logItemClickFalse(model: MusicApplyDataModel.MusicApplyDataModelSub) {
         deleteDataList.add(model)
         visibleDeleteBtn()
     }
 
-    override fun setApplyList(models: ArrayList<MusicApplyDataModel.MusicApplyDataModel>) {
+    override fun setApplyList(models: ArrayList<MusicApplyDataModel.MusicApplyDataModelSub>) {
         binding.musicApplyApplyRecordRv.adapter = MusicApplyLogAdapter(models, this)
     }
 

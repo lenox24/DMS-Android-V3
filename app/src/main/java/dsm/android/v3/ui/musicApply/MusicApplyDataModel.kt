@@ -19,7 +19,7 @@ data class MusicApplyDataModel(
     @SerializedName("fri")
     var fridayList: ArrayList<MusicApplyDataModel>
 ) {
-    data class MusicApplyDataModel(
+    data class MusicApplyDataModelSub(
         @SerializedName("applyDate")
         var applyDate: String,
 

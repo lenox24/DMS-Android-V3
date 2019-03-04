@@ -29,8 +29,6 @@ class MusicApplyLogViewModel(val contract: MusicApplyLogNavigator, val title: St
 
 
     fun musicApplyClickDelete(view: View) {
-        // 서버 통신 필요
-        //아예 삭제해버리면 안돼고 아이템은 2개로 유지
         for (deleteData in deleteDataList) {
             Log.e("dsgsdgdsg", "${deleteData.id}")
             api.deleteMusic(getToken(view.context), hashMapOf("applyId" to deleteData.id))
