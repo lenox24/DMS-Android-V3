@@ -7,14 +7,12 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v4.view.PagerAdapter
 import android.support.v7.widget.Api17CardView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import dsm.android.v3.R
-import dsm.android.v3.model.MusicApplyModel
 import dsm.android.v3.ui.musicApplyLog.MusicApplyLogActivity
 import dsm.android.v3.util.DataBindingActivity
 import kotlinx.android.synthetic.main.activity_music_apply.*
@@ -22,6 +20,7 @@ import kotlinx.android.synthetic.main.item_music_apply.view.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import android.util.TypedValue
+import dsm.android.v3.model.MusicApplySettingViewPagerModel
 
 @Suppress("DEPRECATION")
 class MusicApplyActivity : DataBindingActivity<dsm.android.v3.databinding.ActivityMusicApplyBinding>(), MusicApplyNavigator {
@@ -31,17 +30,17 @@ class MusicApplyActivity : DataBindingActivity<dsm.android.v3.databinding.Activi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val factory = MusicApplyViewModelFactory(this)
+        val factory = MusicApplyViewModelFactory(this, Lifecycle.Event.ON_RESUME)
         binding.vm =  ViewModelProviders.of(this, factory).get(MusicApplyViewModel::class.java)
     }
 
     override fun setViewPager(mondayCount: Int, tuesdayCount: Int, wednesdayCount: Int, thursdayCount: Int, fridayCount: Int){
         val models = arrayListOf(
-            MusicApplyModel(getString(R.string.apply_music_monday_title), getString(R.string.apply_music_monday_explanation),mondayCount),
-            MusicApplyModel(getString(R.string.apply_music_tuesday_title), getString(R.string.apply_music_tuesday_explanation),tuesdayCount),
-            MusicApplyModel(getString(R.string.apply_music_wednesday_title), getString(R.string.apply_music_wednesday_explanation),wednesdayCount),
-            MusicApplyModel(getString(R.string.apply_music_thursday_title), getString(R.string.apply_music_thursday_explanation),thursdayCount),
-            MusicApplyModel(getString(R.string.apply_music_friday_title), getString(dsm.android.v3.R.string.apply_music_friday_explanation),fridayCount)
+            MusicApplySettingViewPagerModel(getString(R.string.apply_music_monday_title), getString(R.string.apply_music_monday_explanation),mondayCount),
+            MusicApplySettingViewPagerModel(getString(R.string.apply_music_tuesday_title), getString(R.string.apply_music_tuesday_explanation),tuesdayCount),
+            MusicApplySettingViewPagerModel(getString(R.string.apply_music_wednesday_title), getString(R.string.apply_music_wednesday_explanation),wednesdayCount),
+            MusicApplySettingViewPagerModel(getString(R.string.apply_music_thursday_title), getString(R.string.apply_music_thursday_explanation),thursdayCount),
+            MusicApplySettingViewPagerModel(getString(R.string.apply_music_friday_title), getString(dsm.android.v3.R.string.apply_music_friday_explanation),fridayCount)
         )
         val margin =
             TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (60 * 2).toFloat(), resources.displayMetrics).toInt()
@@ -52,7 +51,7 @@ class MusicApplyActivity : DataBindingActivity<dsm.android.v3.databinding.Activi
 
     override fun intentMusicApplyLog() = startActivity<MusicApplyLogActivity>("currentItem" to musicApply_apply_list_pager.currentItem)
 
-    inner class ApplyPageAdapter(val models: ArrayList<MusicApplyModel>) : PagerAdapter() {
+    inner class ApplyPageAdapter(val models: ArrayList<MusicApplySettingViewPagerModel>) : PagerAdapter() {
 
         override fun isViewFromObject(p0: View, p1: Any): Boolean  = p0 == p1
 

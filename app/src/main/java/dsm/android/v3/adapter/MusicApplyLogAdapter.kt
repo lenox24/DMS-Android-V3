@@ -11,12 +11,12 @@ import android.widget.LinearLayout
 import  java.util.ArrayList
 import android.widget.TextView
 import dsm.android.v3.R
-import dsm.android.v3.ui.musicApply.MusicApplyDataModel
+import dsm.android.v3.ui.musicApply.MusicApplyModel
 import dsm.android.v3.ui.musicApplyLog.MusicApplyLogActivity
 import dsm.android.v3.ui.musicApplyLog.MusicApplyLogNavigator
 import org.jetbrains.anko.*
 
-class MusicApplyLogAdapter(val models: ArrayList<MusicApplyDataModel.MusicApplyDataModelSub>, val applyGoingLogRv: MusicApplyLogNavigator.MusicApplyLogRv): RecyclerView.Adapter<MusicApplyLogAdapter.ApplyGoingLogViewHolder>(){
+class MusicApplyLogAdapter(val models: ArrayList<MusicApplyModel.MusicApplyDataModel>, val applyGoingLogRv: MusicApplyLogNavigator.MusicApplyLogRv): RecyclerView.Adapter<MusicApplyLogAdapter.ApplyGoingLogViewHolder>(){
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ApplyGoingLogViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.item_music_apply_log, p0, false)
@@ -44,7 +44,7 @@ class MusicApplyLogAdapter(val models: ArrayList<MusicApplyDataModel.MusicApplyD
             }
         }
 
-        fun bind(model:  MusicApplyDataModel.MusicApplyDataModelSub){
+        fun bind(model:  MusicApplyModel.MusicApplyDataModel){
             itemView.setOnClickListener {
                 if (clicked) {
                     itemClickedTrue()

@@ -3,7 +3,7 @@ package dsm.android.v3.ui.musicApply
 import com.google.gson.annotations.SerializedName
 import  java.util.*
 
-data class MusicApplyDataModel(
+data class MusicApplyModel(
     @SerializedName("mon")
     var mondayList: ArrayList<MusicApplyDataModel>,
 
@@ -19,7 +19,7 @@ data class MusicApplyDataModel(
     @SerializedName("fri")
     var fridayList: ArrayList<MusicApplyDataModel>
 ) {
-    data class MusicApplyDataModelSub(
+    data class MusicApplyDataModel(
         @SerializedName("applyDate")
         var applyDate: String,
 

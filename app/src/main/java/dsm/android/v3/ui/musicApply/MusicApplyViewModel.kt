@@ -21,9 +21,9 @@ class MusicApplyViewModel(val contract: MusicApplyNavigator, val event: Lifecycl
     init {
         when(event) {
             Lifecycle.Event.ON_RESUME -> {
-                saveToken(contract as Context, "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTE0NTY3NzYsIm5iZiI6MTU1MTQ1Njc3NiwianRpIjoiZTEzYmVmYjEtMDg1OS00Y2ZiLWI1ZWQtNTZjNjUzMmY0MzQ2IiwiZXhwIjoxNTUxNDYwMzc2LCJpZGVudGl0eSI6ImhlbGxvIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.UdB24egd4WzWFcYdHe9A-b8vRbZwUT6EHKAof2GlpAg")
-                api.getMusic(getToken(contract as Context)).enqueue(object: Callback<MusicApplyDataModel> {
-                    override fun onResponse(call: Call<MusicApplyDataModel>, response: Response<MusicApplyDataModel>) {
+                saveToken(contract as Context,"")
+                api.getMusic(getToken(contract as Context)).enqueue(object: Callback<MusicApplyModel> {
+                    override fun onResponse(call: Call<MusicApplyModel>, response: Response<MusicApplyModel>) {
                         when(response.code()){
                             200 -> setMusicApplyData(response.body()!!)
                             204 -> contract.toast("기상음악신청 정보가 없습니다.")
@@ -31,7 +31,7 @@ class MusicApplyViewModel(val contract: MusicApplyNavigator, val event: Lifecycl
                             else -> contract.toast("오류코드: ${response.code()}")
                         }
                     }
-                    override fun onFailure(call: Call<MusicApplyDataModel>, t: Throwable) {
+                    override fun onFailure(call: Call<MusicApplyModel>, t: Throwable) {
                         mondayItemList = ArrayList()
                         tuesdayItemList = ArrayList()
                         wednesdayItemList = ArrayList()
@@ -45,7 +45,7 @@ class MusicApplyViewModel(val contract: MusicApplyNavigator, val event: Lifecycl
         }
     }
 
-    fun setMusicApplyData(musicApplyList: MusicApplyDataModel) {
+    fun setMusicApplyData(musicApplyList: MusicApplyModel) {
         mondayItemList = musicApplyList.mondayList
         tuesdayItemList = musicApplyList.tuesdayList
         wednesdayItemList = musicApplyList.wednesdayList

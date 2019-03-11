@@ -11,7 +11,7 @@ import dsm.android.v3.R
 import dsm.android.v3.databinding.ActivityMusicApplyLogBinding
 import dsm.android.v3.ui.musicApplyLog.MusicApplyLogData.deleteDataList
 import dsm.android.v3.adapter.MusicApplyLogAdapter
-import dsm.android.v3.ui.musicApply.MusicApplyDataModel
+import dsm.android.v3.ui.musicApply.MusicApplyModel
 import kotlinx.android.synthetic.main.activity_music_apply_log.*
 
 class MusicApplyLogActivity : DataBindingActivity<ActivityMusicApplyLogBinding>(), MusicApplyLogNavigator,
@@ -31,19 +31,19 @@ class MusicApplyLogActivity : DataBindingActivity<ActivityMusicApplyLogBinding>(
         explainText(this, title)
     }
 
-    override fun logItemClickTrue(model: MusicApplyDataModel.MusicApplyDataModelSub) {
+    override fun logItemClickTrue(model: MusicApplyModel.MusicApplyDataModel) {
         deleteDataList.remove(model)
         if (deleteDataList.isEmpty()) {
             invisibleDeleteBtn()
         }
     }
 
-    override fun logItemClickFalse(model: MusicApplyDataModel.MusicApplyDataModelSub) {
+    override fun logItemClickFalse(model: MusicApplyModel.MusicApplyDataModel) {
         deleteDataList.add(model)
         visibleDeleteBtn()
     }
 
-    override fun setApplyList(models: ArrayList<MusicApplyDataModel.MusicApplyDataModelSub>) {
+    override fun setApplyList(models: ArrayList<MusicApplyModel.MusicApplyDataModel>) {
         binding.musicApplyApplyRecordRv.adapter = MusicApplyLogAdapter(models, this)
     }
 
