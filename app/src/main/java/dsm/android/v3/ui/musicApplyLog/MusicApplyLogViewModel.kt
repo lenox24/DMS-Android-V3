@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MusicApplyLogViewModel(val contract: MusicApplyLogNavigator, val title: String) : ViewModel() {
+class MusicApplyLogViewModel(val contract: MusicApplyLogNavigator, title: String) : ViewModel() {
 
     val logTitle = MutableLiveData<String>()
 

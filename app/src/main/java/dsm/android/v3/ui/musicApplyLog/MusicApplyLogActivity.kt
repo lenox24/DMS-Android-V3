@@ -11,6 +11,7 @@ import dsm.android.v3.R
 import dsm.android.v3.databinding.ActivityMusicApplyLogBinding
 import dsm.android.v3.ui.musicApplyLog.MusicApplyLogData.deleteDataList
 import dsm.android.v3.adapter.MusicApplyLogAdapter
+import dsm.android.v3.model.MusicApplyLogItemModel
 import dsm.android.v3.ui.musicApply.MusicApplyModel
 import kotlinx.android.synthetic.main.activity_music_apply_log.*
 
@@ -24,11 +25,17 @@ class MusicApplyLogActivity : DataBindingActivity<ActivityMusicApplyLogBinding>(
         val title = intent.getStringExtra("title")
         super.onCreate(savedInstanceState)
         val factory =
-            MusicApplyLogViewModelFactory(this, intent.getStringExtra("title"))
+            MusicApplyLogViewModelFactory(this, title)
         binding.vm = ViewModelProviders.of(this, factory).get(MusicApplyLogViewModel::class.java)
         binding.musicApplyApplyRecordRv.layoutManager = LinearLayoutManager(this)
         invisibleDeleteBtn()
         explainText(this, title)
+
+
+    }
+
+    fun setMusicItems(model:MusicApplyLogItemModel){
+
     }
 
     override fun logItemClickTrue(model: MusicApplyModel.MusicApplyDataModel) {

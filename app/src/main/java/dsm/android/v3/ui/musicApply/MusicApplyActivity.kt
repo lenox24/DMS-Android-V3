@@ -2,6 +2,7 @@ package dsm.android.v3.ui.musicApply
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -21,6 +22,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import android.util.TypedValue
 import dsm.android.v3.model.MusicApplySettingViewPagerModel
+import dsm.android.v3.util.saveToken
 
 @Suppress("DEPRECATION")
 class MusicApplyActivity : DataBindingActivity<dsm.android.v3.databinding.ActivityMusicApplyBinding>(), MusicApplyNavigator {
@@ -32,7 +34,7 @@ class MusicApplyActivity : DataBindingActivity<dsm.android.v3.databinding.Activi
         super.onCreate(savedInstanceState)
         val factory = MusicApplyViewModelFactory(this, Lifecycle.Event.ON_RESUME)
         binding.vm =  ViewModelProviders.of(this, factory).get(MusicApplyViewModel::class.java)
-    }
+       }
 
     override fun setViewPager(mondayCount: Int, tuesdayCount: Int, wednesdayCount: Int, thursdayCount: Int, fridayCount: Int){
         val models = arrayListOf(

@@ -21,8 +21,8 @@ class MusicApplyViewModel(val contract: MusicApplyNavigator, val event: Lifecycl
     init {
         when(event) {
             Lifecycle.Event.ON_RESUME -> {
-                saveToken(contract as Context,"")
-                api.getMusic(getToken(contract as Context)).enqueue(object: Callback<MusicApplyModel> {
+//                saveToken(contract as Context, "")
+             api.getMusic(getToken(contract as Context)).enqueue(object: Callback<MusicApplyModel> {
                     override fun onResponse(call: Call<MusicApplyModel>, response: Response<MusicApplyModel>) {
                         when(response.code()){
                             200 -> setMusicApplyData(response.body()!!)
@@ -32,14 +32,9 @@ class MusicApplyViewModel(val contract: MusicApplyNavigator, val event: Lifecycl
                         }
                     }
                     override fun onFailure(call: Call<MusicApplyModel>, t: Throwable) {
-                        mondayItemList = ArrayList()
-                        tuesdayItemList = ArrayList()
-                        wednesdayItemList = ArrayList()
-                        thursdayItemList = ArrayList()
-                        fridayItemList = ArrayList()
-                        contract.setViewPager(mondayItemList.size, tuesdayItemList.size , wednesdayItemList.size, thursdayItemList.size, fridayItemList.size)
                     }
                 })
+                contract.setViewPager(mondayItemList.size, tuesdayItemList.size , wednesdayItemList.size, thursdayItemList.size, fridayItemList.size)
                 deleteDataList.clear()
             }
         }
