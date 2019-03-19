@@ -48,6 +48,8 @@
                 android:layout_height="0dp"
                 android:onClick="@{() -> vm.extensionEventCall()}"
                 app:cardCornerRadius="16dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
                 app:cardElevation="8dp"
                 app:layout_constraintHeight_max="140dp"
                 app:layout_constraintTop_toBottomOf="@+id/putIn_content_tv"
@@ -108,7 +110,8 @@
 
             <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground">
 
                 <TextView
                         android:id="@+id/putIn_stay_title_tv"
